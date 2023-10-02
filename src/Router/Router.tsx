@@ -1,5 +1,6 @@
 import { Outlet, createBrowserRouter } from "react-router-dom";
 import App from "App";
+import Landing from "Pages/Landing";
 import Home from "Pages/Home";
 import Info from "Pages/Info";
 import Search from "Pages/Search";
@@ -11,6 +12,10 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
+        element: <Landing />,
+      },
+      {
+        path: "Home",
         element: <Home />,
       },
       {

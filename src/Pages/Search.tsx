@@ -1,8 +1,8 @@
-import React from "react";
+import { FC } from "react";
 import TobNavi from "Components/common/TobNavi";
 import SearchInput from "Components/Search/SearchInput";
 
-const Search: React.FC = () => {
+const Search: FC = () => {
   return (
     <>
       <TobNavi />

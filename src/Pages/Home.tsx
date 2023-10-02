@@ -1,7 +1,8 @@
+import { FC } from "react";
 import styled from "styled-components";
 import TobNavi from "Components/common/TobNavi";
 
-const Home = () => {
+const Home: FC = () => {
   return (
     <>
       <TobNavi />

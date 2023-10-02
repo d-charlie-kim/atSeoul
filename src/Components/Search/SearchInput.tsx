@@ -11,7 +11,7 @@ const SearchInput: React.FC = () => {
   const [searchData, setSearchData] = useState([]);
   const { getShowsTitle } = useSeoulShowAPI();
 
-  const searchTimeoutRef = useRef<number | null>(null);
+  const searchTimeoutRef = useRef<number | null | Timeout>(null);
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
     setInputValue(event.target.value);
@@ -24,22 +24,14 @@ const SearchInput: React.FC = () => {
   // useDebounce 얘를 어디서 호출하나요?
 
   function makeKeywordStrong(title: string) {
-    // console.log("!!!! ::: ", new RegExp(`(${inputValue})`, "i"));
     const parts = title.split(new RegExp(`(${inputValue})`, "i")); // split으로 잘려서 배열이 만들어지는데, 자른 분기 str은 살아있다
 
     const temp = parts.map((part, index) =>
       part === inputValue ? <strong key={index}>{part}</strong> : part
     );
 
-    console.log(
-      "🚀 ~ file: SearchInput.tsx:32 ~ makeKeywordStrong ~ temp:",
-      temp
-    );
     return temp;
   }
-
-  //브런치콘서트 [이달의 공연] 11월 클래식과 재즈의 더 배틀
-  //['브런치'],['콘서트'],[' [이달의 공연] 11월 클래식과 재즈의 더 배틀']]
 
   useEffect(() => {
     if (inputValue.length === 0) return;

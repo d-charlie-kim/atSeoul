@@ -2,6 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 
+// interface {
+
+// }
+
 const Contents = ({ showInfo }) => {
   const [currentShowInfo, setCurrentShowInfo] = useState(showInfo);
 
@@ -102,6 +106,20 @@ const SContents = styled.ul`
 
 1. 스크롤을 내릴때마다 끊어서 API 요청
 2. 페이지 첫 랜더링 시에 전체 데이터를 받아온 후에, 스크롤에 따라 데이터를 보여줌
+3. 
+
+
+컨텐츠는 20개씩 혹은 30갸씩 들고온다
+메인 페이지는 페이지네이션으로 구현한다
+검색 페이지는 무한스크롤로 구현한다
+
+메인 페이지
+필터 알아보기
+장르 필터
+지역은 못 찾아
+
+지역을 안내해주고 싶은데 그러려면 다 들고와야 함
+--> 그렇게 가능한가
 
 
 */
