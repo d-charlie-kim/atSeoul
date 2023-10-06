@@ -9,6 +9,8 @@ import useSeoulShowAPI from "API/getShowAPI";
 const SearchInput: React.FC = () => {
   const [inputValue, setInputValue] = useState("");
   const [searchData, setSearchData] = useState([]);
+  const [index, setIndex] = useState(0);
+  const bottomElementRef = useRef(null);
   const { getShowsTitle } = useSeoulShowAPI();
 
   const searchTimeoutRef = useRef<number | null | Timeout>(null);
@@ -20,8 +22,6 @@ const SearchInput: React.FC = () => {
       setSearchData(data);
     }, 500);
   }
-
-  // useDebounce 얘를 어디서 호출하나요?
 
   function makeKeywordStrong(title: string) {
     const parts = title.split(new RegExp(`(${inputValue})`, "i")); // split으로 잘려서 배열이 만들어지는데, 자른 분기 str은 살아있다
@@ -49,7 +49,33 @@ const SearchInput: React.FC = () => {
     };
   }, [inputValue]);
 
-  console.log("🚀 ~ file: SearchInput.tsx:12 ~ searchData:", searchData);
+  useEffect(() => {
+    if (!inputValue.length) return;
+    async function fetchData() {
+      const data = await getShowsTitle(inputValue, index);
+      setSearchData((prevData) => [prevData, ...data]);
+    }
+    fetchData();
+  }, [index]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIndex((prevIndex) => prevIndex + 30);
+        }
+      },
+      { threshold: 0.7 }
+    );
+    if (bottomElementRef.current) {
+      observer.observe(bottomElementRef.current);
+    }
+    return () => {
+      if (bottomElementRef.current) {
+        observer.unobserve(bottomElementRef.current);
+      }
+    };
+  }, []);
 
   return (
     <SLayout>
@@ -62,6 +88,7 @@ const SearchInput: React.FC = () => {
               <Link to={show.HMPG_ADDR}>{makeKeywordStrong(show.TITLE)}</Link>
             </li>
           ))}
+        <div ref={bottomElementRef}></div>
       </SDropDown>
     </SLayout>
   );

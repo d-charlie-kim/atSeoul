@@ -13,6 +13,7 @@ function App() {
       <StyleSheetManager shouldForwardProp={(prop) => prop !== "active"}>
         <GlobalStyle />
         <Outlet />
+        {/* <Chat/> */}
       </StyleSheetManager>
     </QueryClientProvider>
   );

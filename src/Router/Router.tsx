@@ -4,6 +4,7 @@ import Landing from "Pages/Landing";
 import Home from "Pages/Home";
 import Info from "Pages/Info";
 import Search from "Pages/Search";
+import Chat from "Pages/Chat";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Landing />,
+      },
+      {
+        path: "chat",
+        element: <Chat />,
       },
       {
         path: "Home",

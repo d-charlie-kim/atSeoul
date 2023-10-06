@@ -15,8 +15,8 @@ export const tobBar = [
     id: "검색",
   },
   {
-    label: "PART 3",
-    url: "/scroll",
+    label: "채팅",
+    url: "/chat",
     id: "part3",
   },
   {
